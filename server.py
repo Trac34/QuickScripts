@@ -4,11 +4,11 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import ssl
 import sys
 
-def main(ip,port):
+def main(ip,port,certpath,keypath):
 
     httpd = HTTPServer((ip, port), SimpleHTTPRequestHandler)
 
-    httpd.socket = ssl.wrap_socket(httpd.socket, keyfile="/root/certs/pi4Key.pem", certfile="/root/certs/pi4Cert.pem", server_side=True)
+    httpd.socket = ssl.wrap_socket(httpd.socket, keyfile=keypath, certfile=certpath, server_side=True)
     print("Serving https as ip [ %s ] on port %d..." % (ip,port))
     try:
         httpd.serve_forever()
@@ -69,9 +69,11 @@ def get_ip():
 if __name__=="__main__":
     port = 4443
     ip = get_ip()
+    certpath="/root/certs/pi4Cert.pem"
+    keypath="/root/certs/pi4Key.pem"
     if len(sys.argv) == 2:
         port = int(sys.argv[1])
     elif len(sys.argv) == 3:
         ip = sys.argv[1]
         port = int(sys.argv[2])
-    main(ip,port)
+    main(ip,port,certpath,keypath)
