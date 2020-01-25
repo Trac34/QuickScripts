@@ -11,7 +11,7 @@ The get_ip() function is a bit more robust, but you need an addional interaction
   `ip = _c(ips)` line to `ip = ips[n]` , n being the know number in the list that you're LAN address is
 ## Run 
 Generate a TLS public\private key pair, change the paths under `if __name__=="__main__":` line and run with:
-python server.py
+python server.py \n
     or
 python server.py [port]
     or 
