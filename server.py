@@ -68,7 +68,7 @@ def get_ip():
 
 if __name__=="__main__":
     port = 4443
-    ip = get_ip()
+    ip = ''
     certpath="/root/certs/pi4Cert.pem"
     keypath="/root/certs/pi4Key.pem"
     if len(sys.argv) == 2:
@@ -76,4 +76,6 @@ if __name__=="__main__":
     elif len(sys.argv) == 3:
         ip = sys.argv[1]
         port = int(sys.argv[2])
+    if ip == '':
+        ip = get_ip()
     main(ip,port,certpath,keypath)
